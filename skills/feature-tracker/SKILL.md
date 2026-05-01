@@ -237,3 +237,4 @@ Users can customize via env vars in their shell rc:
 - `FEATURE_TRACKER_DATA_DIR` — default `$HOME/.claude/feature-tracker`
 - `FEATURE_TRACKER_ORPHAN_HOURS` — default `6` (auto-close active if no activity for N hours)
 - `FEATURE_TRACKER_PAUSED_HOURS` — default `72` (auto-close paused if not resumed for N hours)
+- `FEATURE_TRACKER_MD_EXPORT_DIR` — optional; if set, each closed feature is also written as a `.md` file there (typically an Obsidian vault). Unset = disabled.
