@@ -1,0 +1,12 @@
+{
+  "name": "feature-tracker",
+  "version": "1.0.0",
+  "description": "Time tracking for development features with pause/resume support, bilingual (en/es) outputs, and automatic session-aware state recovery",
+  "author": {
+    "name": "rmonteroh"
+  },
+  "homepage": "https://github.com/rmonteroh/feature-tracker",
+  "repository": "https://github.com/rmonteroh/feature-tracker",
+  "license": "MIT",
+  "keywords": ["productivity", "time-tracking", "claude-code", "i18n", "bilingual"]
+}
