@@ -1,0 +1,13 @@
+{
+  "name": "feature-tracker",
+  "owner": {
+    "name": "rmonteroh"
+  },
+  "plugins": [
+    {
+      "name": "feature-tracker",
+      "source": "./",
+      "description": "Time tracking for development features with pause/resume support, bilingual (en/es) outputs, and automatic session-aware state recovery"
+    }
+  ]
+}
