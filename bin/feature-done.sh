@@ -128,6 +128,12 @@ else
         }' >> "$LOG_FILE"
 fi
 
+# Trigger MD export for the just-written entry. Errors suppressed so JSONL
+# remains the source of truth — manual /feature-tracker:feature-export-md
+# can regenerate if this fails. Skips silently if MD_EXPORT_DIR is unset.
+LATEST_ENTRY=$(tail -n 1 "$LOG_FILE")
+bash "$(dirname "$0")/feature-export-md.sh" "$LATEST_ENTRY" 2>/dev/null || true
+
 rm "$STATE_FILE"
 
 echo "$MSG_FEATURE_LOGGED"

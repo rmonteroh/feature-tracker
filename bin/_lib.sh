@@ -9,6 +9,9 @@
 : "${FEATURE_TRACKER_PAUSED_HOURS:=72}"
 : "${FEATURE_TRACKER_DESCRIPTION_MODE:=simple}"
 
+# FEATURE_TRACKER_MD_EXPORT_DIR (optional, unset = disabled): path where one .md
+# file per closed feature is written. Typically inside an Obsidian vault.
+
 # ── Derived paths ──────────────────────────────────────────────
 STATE_FILE="$FEATURE_TRACKER_DATA_DIR/current.json"
 PAUSED_DIR="$FEATURE_TRACKER_DATA_DIR/paused"

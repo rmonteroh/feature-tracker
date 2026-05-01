@@ -22,6 +22,9 @@ MSG_MULTIPLE_MATCH="🔍 %d paused features match. Specify with: /feature-resume
 MSG_NO_FEATURES_LOGGED="📭 No features logged yet."
 MSG_STATE_CORRUPT="⚠️  state file corrupt, removing"
 MSG_DESCRIPTION_INVALID="❌ Description JSON missing required 'outcome' field"
+MSG_EXPORT_NO_DIR_SET="❌ FEATURE_TRACKER_MD_EXPORT_DIR is not set. Set it in your shell rc to enable Markdown export."
+MSG_EXPORT_DONE_FMT="✅ Exported %d feature(s) to %s"
+MSG_EXPORT_NO_LOG="📭 No features logged yet — nothing to export."
 
 # ── Hints (action-suggestion lines) ─────────────────────────────
 MSG_CLOSE_OR_DISCARD="Close it first with /feature-done, or to discard:"
