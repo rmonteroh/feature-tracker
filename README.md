@@ -4,9 +4,9 @@ Time tracking for development features with pause/resume support, bilingual (en/
 
 ## What it does
 
-`feature-tracker` records how long you spend on each named feature in your projects. Start tracking explicitly via `/feature-start "fix login bug"`, or let the bundled auto-tracker skill detect intent in your messages. Pause when you switch contexts; resume next session. Stats by project, day, and feature.
+`feature-tracker` records how long you spend on each named feature in your projects. Start tracking explicitly via `/feature-start "fix login bug"`, or let the bundled auto-tracker skill detect intent in your messages. Pause when you switch contexts; resume next session. Each closed feature gets an auto-generated outcome description from the conversation. Stats by project, day, and feature.
 
-Sample output:
+Sample output when closing a feature:
 
 ```
 ✅ Feature logged
@@ -18,6 +18,7 @@ Sample output:
     Pauses:    2  (5m paused, not counted)
 
     Log: /Users/you/.claude/feature-tracker/log.jsonl
+    Outcome:   Fixed OAuth token refresh: retries on 401 with backoff. Added regression test.
 ```
 
 ## Install
