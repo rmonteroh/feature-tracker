@@ -21,6 +21,7 @@ MSG_NO_MATCH="❌ No paused feature matches: %s"
 MSG_MULTIPLE_MATCH="🔍 %d paused features match. Specify with: /feature-resume <text>"
 MSG_NO_FEATURES_LOGGED="📭 No features logged yet."
 MSG_STATE_CORRUPT="⚠️  state file corrupt, removing"
+MSG_DESCRIPTION_INVALID="❌ Description JSON missing required 'outcome' field"
 
 # ── Hints (action-suggestion lines) ─────────────────────────────
 MSG_CLOSE_OR_DISCARD="Close it first with /feature-done, or to discard:"
@@ -44,6 +45,10 @@ LBL_PAUSE_NUM="Pause #"
 LBL_PAUSES_TOTAL="Total pauses"
 LBL_PAUSES="Pauses"
 LBL_LOG="Log"
+LBL_OUTCOME="Outcome"
+LBL_PROBLEM="Problem"
+LBL_NOTES="Notes"
+LBL_TAGS="Tags"
 
 # ── Suffixes / templates with interpolation ─────────────────────
 MSG_THIS_PAUSE_SUFFIX="(this pause)"

@@ -7,6 +7,7 @@
 : "${FEATURE_TRACKER_DATA_DIR:=$HOME/.claude/feature-tracker}"
 : "${FEATURE_TRACKER_ORPHAN_HOURS:=6}"
 : "${FEATURE_TRACKER_PAUSED_HOURS:=72}"
+: "${FEATURE_TRACKER_DESCRIPTION_MODE:=simple}"
 
 # ── Derived paths ──────────────────────────────────────────────
 STATE_FILE="$FEATURE_TRACKER_DATA_DIR/current.json"

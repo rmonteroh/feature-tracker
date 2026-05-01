@@ -134,7 +134,13 @@ Run `bash "${CLAUDE_PLUGIN_ROOT}/bin/feature-resume.sh"` (with optional name arg
 
 ## CLOSE tracking (strict)
 
-Run `bash "${CLAUDE_PLUGIN_ROOT}/bin/feature-done.sh"` when ANY of:
+Before running the close script, generate a description from the conversation. Read `${FEATURE_TRACKER_DESCRIPTION_MODE:-simple}` and follow the rules in `commands/feature-done.md` (or recap below):
+
+- **`outcome` (required, both modes)**: 1-2 sentences in past tense, user's language, what got DONE. Fallback: `"Worked on: <feature name>"` if context is thin.
+- **`structured` mode adds**: `problem`, `notes`, `tags` (each optional — omit if unclear).
+- Build the JSON, then run: `bash "${CLAUDE_PLUGIN_ROOT}/bin/feature-done.sh" '<json>'`.
+
+Trigger the close flow when ANY of:
 
 1. **User explicitly signals completion**:
    - **Spanish:** "listo", "ya quedó", "ya está", "termine", "funciona", "perfecto, ya"
