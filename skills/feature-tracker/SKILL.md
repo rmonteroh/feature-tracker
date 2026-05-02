@@ -17,7 +17,7 @@ The data dir is `${FEATURE_TRACKER_DATA_DIR:-$HOME/.claude/feature-tracker}/`. I
 
 ## Companion slash commands
 
-`/feature-start <name>`, `/feature-pause`, `/feature-resume [name]`, `/feature-done`, `/feature-stats`, `/feature-paused`. If the user invokes any of these manually, this skill stays out of the way.
+`/feature-tracker:start <name>`, `/feature-tracker:pause`, `/feature-tracker:resume [name]`, `/feature-tracker:done`, `/feature-tracker:stats`, `/feature-tracker:paused`, `/feature-tracker:export-md`. If the user invokes any of these manually, this skill stays out of the way.
 
 ## Operating principles
 
@@ -134,7 +134,7 @@ Run `bash "${CLAUDE_PLUGIN_ROOT}/bin/feature-resume.sh"` (with optional name arg
 
 ## CLOSE tracking (strict)
 
-Before running the close script, generate a description from the conversation. Read `${FEATURE_TRACKER_DESCRIPTION_MODE:-simple}` and follow the rules in `commands/feature-done.md` (or recap below):
+Before running the close script, generate a description from the conversation. Read `${FEATURE_TRACKER_DESCRIPTION_MODE:-simple}` and follow the rules in `commands/done.md` (or recap below):
 
 - **`outcome` (required, both modes)**: 1-2 sentences in past tense, user's language, what got DONE. Fallback: `"Worked on: <feature name>"` if context is thin.
 - **`structured` mode adds**: `problem`, `notes`, `tags` (each optional — omit if unclear).
@@ -189,7 +189,7 @@ Spanish example:
 
 ## Don't interfere with manual commands
 
-If the user types `/feature-start`, `/feature-pause`, `/feature-resume`, `/feature-done`, `/feature-stats`, or `/feature-paused`, those slash commands handle it. Don't auto-trigger on the same turn.
+If the user types `/feature-tracker:start`, `/feature-tracker:pause`, `/feature-tracker:resume`, `/feature-tracker:done`, `/feature-tracker:stats`, `/feature-tracker:paused`, or `/feature-tracker:export-md`, those slash commands handle it. Don't auto-trigger on the same turn.
 
 ---
 
@@ -205,16 +205,16 @@ When you receive a SessionStart message in `additionalContext` mentioning paused
    >
    > - **<name>** (worked <accum>, paused <pause> ago)
    >
-   > Want to resume with `/feature-resume`, close it, or leave it paused?
+   > Want to resume with `/feature-tracker:resume`, close it, or leave it paused?
 
    Spanish:
    > 📌 Veo que tenías features pausadas en este proyecto:
    >
    > - **<name>** (trabajaste <accum>, en pausa hace <pause>)
    >
-   > ¿Quieres retomarla con `/feature-resume`, cerrarla, o dejarla pausada?
+   > ¿Quieres retomarla con `/feature-tracker:resume`, cerrarla, o dejarla pausada?
 
-3. If only one paused feature, propose `/feature-resume` directly as the obvious action.
+3. If only one paused feature, propose `/feature-tracker:resume` directly as the obvious action.
 4. If the user replies with intent ("sí retomemos" / "yes resume" / "ciérrala" / "close it"), invoke the appropriate script.
 
 ---
