@@ -54,6 +54,7 @@ All optional. Set in your shell rc (`~/.zshrc`, `~/.bashrc`, etc.) before launch
 | `/feature-tracker:stats` | Show totals by project, day, and recent features |
 | `/feature-tracker:paused` | List all paused features grouped by project |
 | `/feature-tracker:export-md` | Regenerate all feature `.md` files from the log into `$FEATURE_TRACKER_MD_EXPORT_DIR` |
+| `/feature-tracker:doctor` | Diagnose config, dependencies, and state — show what's set, what's missing, and any errors |
 
 ## Auto-tracking
 

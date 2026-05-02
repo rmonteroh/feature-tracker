@@ -25,6 +25,13 @@ MSG_DESCRIPTION_INVALID="❌ JSON de descripción sin el campo 'outcome' requeri
 MSG_EXPORT_NO_DIR_SET="❌ FEATURE_TRACKER_MD_EXPORT_DIR no está configurada. Defínela en tu shell rc para activar el export a Markdown."
 MSG_EXPORT_DONE_FMT="✅ Exportadas %d feature(s) a %s"
 MSG_EXPORT_NO_LOG="📭 No hay features registradas todavía — nada que exportar."
+MSG_DOCTOR_HEADER="Feature tracker doctor"
+MSG_DOCTOR_ALL_OK="Todos los chequeos pasaron."
+MSG_DOCTOR_WARN_FMT="%d advertencia(s) — ver arriba."
+MSG_DOCTOR_ERR_FMT="%d error(es), %d advertencia(s) — ver arriba."
+LBL_DOCTOR_CONFIG="Configuración"
+LBL_DOCTOR_DEPS="Dependencias"
+LBL_DOCTOR_STATE="Estado"
 
 # ── Hints (action-suggestion lines) ─────────────────────────────
 MSG_CLOSE_OR_DISCARD="Cierra primero con /feature-done, o si quieres descartarla:"
