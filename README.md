@@ -97,8 +97,8 @@ When `FEATURE_TRACKER_MD_EXPORT_DIR` is set, every closed feature is also writte
 date: 2026-05-01
 project: "kairo-crm"
 feature: "Properties redesign"
-duration_minutes: 234
 duration_seconds: 14063
+duration: "3h 54m 23s"
 pause_count: 0
 started_at: 2026-05-01T11:50:20-0500
 ended_at: 2026-05-01T15:44:23-0500

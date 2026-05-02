@@ -41,18 +41,42 @@ yaml_quote() {
     printf '"%s"' "$v"
 }
 
+# fmt_dur_full: format seconds as a human-readable duration with all components
+# (always shows seconds when applicable, unlike _lib.sh's fmt_dur which drops
+# them at the hour scale). Examples:
+#   45    → "45s"
+#   90    → "1m 30s"
+#   3600  → "1h 0m 0s"
+#   5450  → "1h 30m 50s"
+#   21876 → "6h 4m 36s"
+fmt_dur_full() {
+    local s=$1
+    if [ "$s" -lt 0 ]; then s=0; fi
+    if [ "$s" -lt 60 ]; then
+        printf '%ds' "$s"
+    elif [ "$s" -lt 3600 ]; then
+        local m=$((s / 60))
+        local sec=$((s % 60))
+        printf '%dm %ds' "$m" "$sec"
+    else
+        local h=$((s / 3600))
+        local m=$(((s % 3600) / 60))
+        local sec=$((s % 60))
+        printf '%dh %dm %ds' "$h" "$m" "$sec"
+    fi
+}
+
 # write_one: take a single JSON entry (string), write the corresponding .md file.
 # Requires MD_DIR to be set + writable; caller is responsible for mkdir.
 write_one() {
     local entry="$1"
-    local date feature project duration_minutes duration_seconds pause_count
+    local date feature project duration_seconds pause_count
     local started_at ended_at desc_type
     local outcome problem notes tags_array
 
     date=$(jq -r '.date' <<<"$entry")
     feature=$(jq -r '.feature' <<<"$entry")
     project=$(jq -r '.project' <<<"$entry")
-    duration_minutes=$(jq -r '.duration_minutes // 0' <<<"$entry")
     duration_seconds=$(jq -r '.duration_seconds // 0' <<<"$entry")
     pause_count=$(jq -r '.pause_count // 0' <<<"$entry")
     started_at=$(jq -r '.started_at' <<<"$entry")
@@ -90,8 +114,8 @@ write_one() {
         echo "date: $date"
         echo "project: $(yaml_quote "$project")"
         echo "feature: $(yaml_quote "$feature")"
-        echo "duration_minutes: $duration_minutes"
         echo "duration_seconds: $duration_seconds"
+        echo "duration: $(yaml_quote "$(fmt_dur_full "$duration_seconds")")"
         echo "pause_count: $pause_count"
         echo "started_at: $started_at"
         echo "ended_at: $ended_at"
