@@ -32,6 +32,11 @@ MSG_DOCTOR_ERR_FMT="%d error(es), %d advertencia(s) — ver arriba."
 LBL_DOCTOR_CONFIG="Configuración"
 LBL_DOCTOR_DEPS="Dependencias"
 LBL_DOCTOR_STATE="Estado"
+LBL_DOCTOR_PLATFORM="Plataforma"
+MSG_DOCTOR_PLATFORM_MACOS="macOS (soportado)"
+MSG_DOCTOR_PLATFORM_LINUX="Linux (no probado, posiblemente funcione — por favor reporta issues)"
+MSG_DOCTOR_PLATFORM_WINDOWS="Windows nativo no soportado — usá WSL"
+MSG_DOCTOR_PLATFORM_UNKNOWN_FMT="Plataforma desconocida: %s"
 
 # ── Hints (action-suggestion lines) ─────────────────────────────
 MSG_CLOSE_OR_DISCARD="Cierra primero con /feature-done, o si quieres descartarla:"

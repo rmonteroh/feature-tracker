@@ -32,6 +32,11 @@ MSG_DOCTOR_ERR_FMT="%d error(s), %d warning(s) — see above."
 LBL_DOCTOR_CONFIG="Config"
 LBL_DOCTOR_DEPS="Dependencies"
 LBL_DOCTOR_STATE="State"
+LBL_DOCTOR_PLATFORM="Platform"
+MSG_DOCTOR_PLATFORM_MACOS="macOS (supported)"
+MSG_DOCTOR_PLATFORM_LINUX="Linux (untested, may work — please file issues)"
+MSG_DOCTOR_PLATFORM_WINDOWS="Windows native not supported — please use WSL"
+MSG_DOCTOR_PLATFORM_UNKNOWN_FMT="Unknown platform: %s"
 
 # ── Hints (action-suggestion lines) ─────────────────────────────
 MSG_CLOSE_OR_DISCARD="Close it first with /feature-done, or to discard:"
