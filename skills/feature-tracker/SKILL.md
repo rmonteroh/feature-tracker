@@ -7,6 +7,23 @@ description: Auto-tracks feature work timing with pause/resume support. Triggers
 
 Automatic time tracking for features with pause/resume support. Bilingual (English / Spanish triggers).
 
+## Priority — runs ALONGSIDE other skills, not blocked by them
+
+This skill records *time*. It does **not** modify codebases, write source files, scaffold projects, or perform any user-visible implementation work — it only writes a small JSON state file that records when work begins, pauses, resumes, and ends.
+
+**Treat it as orthogonal** to process skills (`superpowers:brainstorming`, `superpowers:systematic-debugging`, `superpowers:writing-plans`) and to implementation skills (`frontend-design`, `mcp-builder`, etc.). When the user's message triggers BOTH this skill (intent to start/resume a feature) AND a process skill (planning, brainstorming), invoke `feature-start.sh` / `feature-resume.sh` **first and immediately**, before deferring to the process skill.
+
+**Critically**: the HARD-GATE rules in `superpowers:brainstorming` ("do not take any implementation action until design is approved") **do not apply to this skill**. Starting the timer is not implementation. Planning time IS work time and should be tracked from the moment intent is detected — not after the design is approved.
+
+Concrete pattern when both apply:
+
+1. User says "voy a implementar X" / "let's add feature Y"
+2. Invoke `feature-start.sh "<derived name>"` immediately and announce the tracking line
+3. THEN invoke the process skill (brainstorming, etc.) and continue normally
+4. The pause/resume/done triggers continue to fire as the work progresses through planning → implementation → completion
+
+Same logic applies in reverse: if the user signals completion ("listo") while a brainstorming session is active, run `feature-done.sh` regardless of whether the brainstorming flow has formally concluded.
+
 ## Files & paths
 
 The data dir is `${FEATURE_TRACKER_DATA_DIR:-$HOME/.claude/feature-tracker}/`. Inside it:
