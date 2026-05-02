@@ -4,7 +4,7 @@ Time tracking for development features with pause/resume support, bilingual (en/
 
 ## What it does
 
-`feature-tracker` records how long you spend on each named feature in your projects. Start tracking explicitly via `/feature-start "fix login bug"`, or let the bundled auto-tracker skill detect intent in your messages. Pause when you switch contexts; resume next session. Each closed feature gets an auto-generated outcome description from the conversation. Stats by project, day, and feature.
+`feature-tracker` records how long you spend on each named feature in your projects. Start tracking explicitly via `/feature-tracker:start "fix login bug"`, or let the bundled auto-tracker skill detect intent in your messages. Pause when you switch contexts; resume next session. Each closed feature gets an auto-generated outcome description from the conversation. Stats by project, day, and feature.
 
 Sample output when closing a feature:
 
@@ -47,13 +47,13 @@ All optional. Set in your shell rc (`~/.zshrc`, `~/.bashrc`, etc.) before launch
 
 | Command | What it does |
 |---|---|
-| `/feature-start <name>` | Begin tracking a new feature |
-| `/feature-pause` | Pause the active feature (resume later) |
-| `/feature-resume [name]` | Resume a paused feature (defaults to one in current project) |
-| `/feature-done` | Close the active feature, append to log |
-| `/feature-stats` | Show totals by project, day, and recent features |
-| `/feature-paused` | List all paused features grouped by project |
-| `/feature-export-md` | Regenerate all feature `.md` files from the log into `$FEATURE_TRACKER_MD_EXPORT_DIR` |
+| `/feature-tracker:start <name>` | Begin tracking a new feature |
+| `/feature-tracker:pause` | Pause the active feature (resume later) |
+| `/feature-tracker:resume [name]` | Resume a paused feature (defaults to one in current project) |
+| `/feature-tracker:done` | Close the active feature, append to log |
+| `/feature-tracker:stats` | Show totals by project, day, and recent features |
+| `/feature-tracker:paused` | List all paused features grouped by project |
+| `/feature-tracker:export-md` | Regenerate all feature `.md` files from the log into `$FEATURE_TRACKER_MD_EXPORT_DIR` |
 
 ## Auto-tracking
 
@@ -118,7 +118,7 @@ Old flat schema couldn't represent computed values.
 
 H2 labels respect `FEATURE_TRACKER_LANG` (`Outcome` / `Resultado`, `Problem` / `Problema`, `Notes` / `Notas`).
 
-To regenerate ALL `.md` files from scratch (e.g., after upgrading the plugin format), run `/feature-export-md`.
+To regenerate ALL `.md` files from scratch (e.g., after upgrading the plugin format), run `/feature-tracker:export-md`.
 
 ## Data
 
