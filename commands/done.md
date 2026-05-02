@@ -37,20 +37,46 @@ Build JSON with only `outcome`:
 
 ### Mode `structured`
 
-Build JSON with `outcome` (required) plus any of these you can fill from the conversation. Omit any field you can't fill confidently:
+Build JSON with `outcome` (required) plus the three optional fields below. **Strongly prefer to fill `problem` and `notes`** — only omit when truly impossible to infer from the feature name + outcome + conversation context.
 
-- `problem` — 1 sentence: what was wrong or needed (omit if unclear)
-- `notes` — TODOs, blockers, links to tickets/PRs (omit if none)
-- `tags` — 1-3 from `[bug, feature, refactor, docs, test, perf, chore, ux, infra]` (omit if unsure)
+- **`problem`** — 1 sentence: what was wrong or what need motivated the work. **Always try to derive this**, even if not explicitly discussed:
+  - Infer from the feature name (e.g., `"fix login bug"` → `"Login was failing under <inferred condition>"`)
+  - Infer from the outcome (e.g., outcome mentions "added retry logic" → problem = "no retry was happening before")
+  - Infer from common context (e.g., `"refactor X module"` → `"Old structure was hard to extend / had duplication / mixed concerns"`)
+  - Only omit if the feature name and outcome give literally zero hint about the underlying need.
 
-Example:
+- **`notes`** — follow-ups, links to tickets/PRs, blockers, or "not done yet" items mentioned anywhere in the conversation. **Look for these signals**:
+  - Phrases like "TODO", "pendiente", "queda por", "follow-up", "luego", "later"
+  - Mentions of ticket IDs (Linear `ENG-123`, Jira `PROJ-456`, etc.) or PR numbers (`#42`)
+  - Acknowledged limitations ("doesn't handle X yet", "X is still buggy")
+  - Manual steps the user must do later ("don't forget to deploy", "needs migration")
+  - Only omit if the conversation has zero forward-looking content.
+
+- **`tags`** — 1-3 from `[bug, feature, refactor, docs, test, perf, chore, ux, infra]`. Pick at least one when the work clearly fits a category. Omit only if the work spans many categories ambiguously.
+
+**Don't invent content** — if you genuinely can't derive `problem` from the conversation+feature name+outcome, leave it out. The point is to be aggressive about deriving from REAL signals, not to fabricate.
+
+Examples:
+
+Rich context → all fields:
 ```json
 {
   "outcome": "Added retry logic with exponential backoff for OAuth 401s.",
-  "problem": "Users were being logged out when tokens expired.",
+  "problem": "Users were being logged out when tokens expired because the OAuth client wasn't retrying.",
+  "notes": "Refresh-token rotation still TODO. PR #456 merged. Linear: ENG-1234.",
   "tags": ["bug", "auth"]
 }
 ```
+
+Thin context → infer from name + outcome:
+```json
+{
+  "outcome": "Refactored properties module to support nested fields.",
+  "problem": "The flat schema couldn't represent computed values.",
+  "tags": ["refactor"]
+}
+```
+(`notes` omitted because no follow-ups were mentioned, but `problem` was inferred from the outcome describing a structural limitation.)
 
 ## Step 3: Run the close script with the JSON arg
 
