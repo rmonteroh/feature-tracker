@@ -83,6 +83,27 @@ else
     err "iconv not found (needed for slug generation)"
 fi
 
+# ─────────────────────────────────────── Platform ───
+section "$LBL_DOCTOR_PLATFORM"
+
+# Detect host OS. Prefer $OSTYPE (set by bash); fall back to `uname -s`.
+platform_id="${OSTYPE:-$(uname -s 2>/dev/null | tr '[:upper:]' '[:lower:]')}"
+case "$platform_id" in
+    darwin*)
+        ok "$MSG_DOCTOR_PLATFORM_MACOS"
+        ;;
+    linux*)
+        warn "$MSG_DOCTOR_PLATFORM_LINUX"
+        ;;
+    cygwin*|msys*|mingw*|win32*)
+        err "$MSG_DOCTOR_PLATFORM_WINDOWS"
+        ;;
+    *)
+        # shellcheck disable=SC2059
+        warn "$(printf "$MSG_DOCTOR_PLATFORM_UNKNOWN_FMT" "$platform_id")"
+        ;;
+esac
+
 # ─────────────────────────────────────── State ───
 section "$LBL_DOCTOR_STATE"
 

@@ -149,8 +149,19 @@ Log entry shape:
 
 ## Requirements
 
+### Supported platforms
+
+- ✅ **macOS** — developed and tested here
+- ⚠️ **Linux** — should work but untested; please file issues
+- ❌ **Windows native** — not supported; use [WSL](https://learn.microsoft.com/en-us/windows/wsl/)
+
+`/feature-tracker:doctor` reports the detected platform and will surface an error on Windows-native shells (Cygwin/MSYS/MINGW).
+
+### Dependencies
+
 - bash 4+
-- `jq` (`brew install jq` on macOS, `apt install jq` on Debian/Ubuntu)
+- `jq` — `brew install jq` (macOS), `apt install jq` (Linux)
+- `iconv` (used for slug generation; ships with macOS and most Linux distros)
 
 ## License
 
