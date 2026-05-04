@@ -1,6 +1,6 @@
 {
   "name": "feature-tracker",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "description": "Time tracking for development features with pause/resume support, bilingual (en/es) outputs, and automatic session-aware state recovery",
   "author": {
     "name": "rmonteroh"

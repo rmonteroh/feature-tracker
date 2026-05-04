@@ -8,10 +8,10 @@ The user wants to close the active feature. Before running the close script, gen
 ## Step 1: Check description mode
 
 ```bash
-echo "${FEATURE_TRACKER_DESCRIPTION_MODE:-simple}"
+echo "${FEATURE_TRACKER_DESCRIPTION_MODE:-structured}"
 ```
 
-This prints `simple` (default) or `structured`. Use it to decide what JSON shape to build below.
+This prints `structured` (default) or `simple`. Use it to decide what JSON shape to build below.
 
 ## Step 2: Generate the description
 

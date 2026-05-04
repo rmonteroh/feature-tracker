@@ -7,7 +7,7 @@
 : "${FEATURE_TRACKER_DATA_DIR:=$HOME/.claude/feature-tracker}"
 : "${FEATURE_TRACKER_ORPHAN_HOURS:=6}"
 : "${FEATURE_TRACKER_PAUSED_HOURS:=72}"
-: "${FEATURE_TRACKER_DESCRIPTION_MODE:=simple}"
+: "${FEATURE_TRACKER_DESCRIPTION_MODE:=structured}"
 
 # FEATURE_TRACKER_MD_EXPORT_DIR (optional, unset = disabled): path where one .md
 # file per closed feature is written. Typically inside an Obsidian vault.

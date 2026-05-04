@@ -151,7 +151,7 @@ Run `bash "${CLAUDE_PLUGIN_ROOT}/bin/feature-resume.sh"` (with optional name arg
 
 ## CLOSE tracking (strict)
 
-Before running the close script, generate a description from the conversation. Read `${FEATURE_TRACKER_DESCRIPTION_MODE:-simple}` and follow the rules in `commands/done.md` (or recap below):
+Before running the close script, generate a description from the conversation. Read `${FEATURE_TRACKER_DESCRIPTION_MODE:-structured}` and follow the rules in `commands/done.md` (or recap below):
 
 - **`outcome` (required, both modes)**: 1-2 sentences in past tense, user's language, what got DONE. Fallback: `"Worked on: <feature name>"` if context is thin.
 - **`structured` mode adds**: `problem`, `notes`, `tags` (each optional — omit if unclear).

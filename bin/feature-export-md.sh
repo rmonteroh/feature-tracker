@@ -3,6 +3,15 @@ set -euo pipefail
 source "$(dirname "$0")/_lib.sh"
 
 MD_DIR="${FEATURE_TRACKER_MD_EXPORT_DIR:-}"
+MD_LAYOUT="${FEATURE_TRACKER_MD_EXPORT_LAYOUT:-flat}"
+
+case "$MD_LAYOUT" in
+    flat|nested) ;;
+    *)
+        printf "$MSG_EXPORT_BAD_LAYOUT_FMT\n" "$MD_LAYOUT" >&2
+        exit 1
+        ;;
+esac
 
 # ── Helpers ──────────────────────────────────────────────────
 
@@ -107,7 +116,16 @@ write_one() {
 
     local s
     s=$(slug "$feature")
-    local filename="$MD_DIR/${date}-${s}.md"
+
+    local target_dir="$MD_DIR"
+    if [[ "$MD_LAYOUT" == "nested" ]]; then
+        local project_slug
+        project_slug=$(slug "$project")
+        local year_month="${date:0:7}"  # YYYY-MM
+        target_dir="$MD_DIR/$project_slug/$year_month"
+        mkdir -p "$target_dir"
+    fi
+    local filename="$target_dir/${date}-${s}.md"
 
     {
         echo "---"
@@ -172,6 +190,30 @@ fi
 
 mkdir -p "$MD_DIR"
 
+# Clean old tracker-generated files before regenerating from scratch.
+# Matches the YYYY-MM-DD-<slug>.md pattern (recursive, layout-agnostic) so a
+# layout switch (flat ↔ nested) leaves no orphans behind. User-created files
+# (e.g. `_index.md`, vault notes) don't match the date prefix, so they survive.
+#
+# We capture find's stderr so we can warn the user if the traversal failed —
+# this happens, for instance, when the export dir is inside iCloud Drive and
+# the shell lacks Full Disk Access. Silent failure would leave duplicates.
+removed=0
+find_err=$(mktemp)
+while IFS= read -r -d '' f; do
+    rm -f "$f"
+    removed=$((removed + 1))
+done < <(find "$MD_DIR" -type f -name '[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9]-*.md' -print0 2>"$find_err")
+
+if [[ -s "$find_err" ]]; then
+    printf "$MSG_EXPORT_CLEAN_WARN\n" >&2
+    sed 's/^/  /' "$find_err" >&2
+fi
+rm -f "$find_err"
+
+# Prune any now-empty subdirs left over from the previous layout.
+find "$MD_DIR" -mindepth 1 -type d -empty -delete 2>/dev/null || true
+
 count=0
 while IFS= read -r entry; do
     [[ -n "$entry" ]] || continue
@@ -180,3 +222,6 @@ while IFS= read -r entry; do
 done < "$LOG_FILE"
 
 printf "$MSG_EXPORT_DONE_FMT\n" "$count" "$MD_DIR"
+if [[ "$removed" -gt 0 ]]; then
+    printf "$MSG_EXPORT_CLEANED_FMT\n" "$removed"
+fi
